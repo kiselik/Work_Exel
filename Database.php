@@ -27,9 +27,9 @@ class Database
             $this->result_str = array();
             @$this->conn = new mysqli($this->local_opt['host'], $this->local_opt['user'], $this->local_opt['pass'], $this->local_opt['db']);
         } catch (Exception $e) {
-        }
 
-        if (!$this->conn) die($this->errors = 'Ошибка соединения с MYSQL: ошибка № ' . $this->conn->connect_errno . " " . $this->conn->connect_errno);
+            if (!$this->conn) die($this->errors = 'Ошибка соединения с MYSQL: ошибка № ' . $this->conn->connect_errno . " " . $this->conn->connect_errno);
+        }
     }
 
     //проверить день в бд
@@ -37,7 +37,7 @@ class Database
     {
 
         $this->Check_day($tmp);
-        # узнаем, есть ли такой день в бд
+        # узнаем, есть ли такой день в бд; если нет, вперед-добавим
         if (empty($this->result_data['name_day_of_week'])) {
 
             # подготовка запроса
@@ -56,7 +56,7 @@ class Database
             }
             $stmt->close();
         } else {
-            echo "такой день уже добавлен =(";
+            echo "такой день уже добавлен =(<br>";
         }
 
     }
